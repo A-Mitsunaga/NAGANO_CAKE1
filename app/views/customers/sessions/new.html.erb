@@ -1,0 +1,26 @@
+<span style="color:#000000; background-color:#d3d3d3;">ログイン</span>
+<br>
+<br>
+<span style="color:#000000; background-color:#d3d3d3;">会員の方はこちらからログイン</span>
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+      <%= form_with model: @customer, url: customer_session_path, local: true do |f| %>
+
+      <p><%= f.label :email, "メールアドレス" %></p>
+      <p><%= f.label :password, "パスワード" %></p>
+  </div>
+
+      <div class="col-sm-9">
+      <p><%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "sample@example.com", size: 40 %></p>
+      <p><%= f.password_field :password, autocomplete: "current-password", size: 40 %></p>
+      <div class="actions">
+    <%= f.submit "ログイン", class: "btn btn-primary" %>
+  </div>
+<% end %>
+</div>
+
+    </div>
+</div>
+<br>

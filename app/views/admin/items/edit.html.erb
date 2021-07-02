@@ -1,0 +1,25 @@
+<span style="color:#000000; background-color:#d3d3d3;">商品編集</span>
+<div class="text-center">
+<%= form_with model:@item, url:"/admin/items/#{@item.id}", local:true do |f| %>
+
+<h6>商品画像</h6>
+<%= f.attachment_field :image %>
+
+<h6>商品名</h6>
+<%= f.text_field :name %>
+
+<h6>商品説明</h6>
+<%= f.text_area :introduction %>
+
+<h6>税込価格</h6>
+<%= f.text_field :price %>円
+
+<h6>販売ステータス</h6>
+<%= f.radio_button :sales_status, :on_sale %>
+<%= f.label :sales_status_on_sale, '販売中' %>
+<%= f.radio_button :sales_status, :discontinued %>
+<%= f.label :sales_status_discontinued, '販売中止' %>
+<br>
+<%= f.submit '変更を保存', class: "btn btn-success" %>
+<% end %>
+</div>

@@ -1,0 +1,46 @@
+<span style="color:#000000; background-color:#d3d3d3;">注文履歴詳細</span>
+
+<strong>購入者</strong><%= @order.customer.full_name %><br>
+<strong>注文日</strong><%= @order.created_at %><br>
+<strong>配送先</strong><%= @order.address %><br>
+<strong>支払方法</strong><%= @order.payment_method %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <table class="table">
+  <thead>
+    <tr class="table-warning">
+      <th>商品名</th>
+      <th>単価（税込）</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+     <%# @orders.each do |order| %>
+     <%# @orders.item.each do |item| %>
+     <tr>
+       <td><%#= items.name %></td>
+       <td><%#= item.item.price %></td>
+       <td><%#= item.amount %></td>
+       <td><%#= (item.item.price * item.amount) %></td>
+     </tr>
+       <%# end %>
+  </tbody>
+</table>
+
+    </div>
+    <div class="col-sm">
+      <% sum = 0 %>
+   <%# @cart_items.each do |item| %>
+   <!--billing_amount-->
+    <%# sum += (item.item.price * item.amount) %>
+     <%# end %>
+
+<strong>商品合計</strong><%= sum %>円<br>
+<strong>送料</strong><%= @order.shipping_cost %>円<br>
+<strong>請求金額合計</strong><%= sum + @order.shipping_cost %>円
+    </div>
+  </div>
+</div>

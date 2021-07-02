@@ -1,0 +1,26 @@
+<span style="color:#000000; background-color:#d3d3d3;">商品詳細</span>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+    <%= attachment_image_tag @item, :image, format: 'jpeg', size: "300x300" %>
+    </div>
+    <div class="col-sm">
+      <strong>商品名</strong>
+      <p><%= @item.name %></p>
+
+      <strong>商品説明</strong>
+      <p><%= @item.introduction %></p>
+
+      <strong>税込価格</strong>
+      <p><%= @item.price %>円</p>
+
+      <strong>販売ステータス</strong>
+      <br>
+      <font color="green"><%= @item.is_active %></font>
+
+      <br>
+      <%= link_to "編集する", edit_admin_item_path, class: "btn btn-success" %>
+    </div>
+
+  </div>
+</div>

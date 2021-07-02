@@ -1,0 +1,27 @@
+<span style="color:#000000; background-color:#d3d3d3;">会員一覧</span>
+
+<table class="table">
+  <thead>
+    <tr class="table table-warning">
+      <th scope="col">会員ID</th>
+      <th scope="col">氏名</th>
+      <th scope="col">メールアドレス</th>
+      <th scope="col">ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.id %></td>
+      <td><%= link_to customer.full_name, admin_customer_path(customer.id) %></td>
+      <td><%= customer.email %></td>
+      <td>
+        <font color="green">
+        <%= customer.is_active %></td>
+        </font>
+    </tr>
+        <% end %>
+  </tbody>
+</table>
+
+<%= paginate @customers %>

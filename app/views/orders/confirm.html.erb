@@ -1,0 +1,62 @@
+<h6>注文情報確認</h6>
+<%# if @order.errors.any? %>
+  <%#= @order.errors.count %>
+  <!--件のエラーが発生しました-->
+  <%# @order.errors.full_messages.each do |message| %>
+    <%#= message %>
+  <%# end %>
+<%# end %>
+  <table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+      <%= @cart_items.each do |item| %>
+     <tr>
+       <td><%= item.item.name %></td>
+       <td><%= item.item.price %></td>
+       <td><%= item.amount %></td>
+       <td><%= (item.item.price * item.amount) %></td>
+       <% end %>
+     </tr>
+  </tbody>
+</table>
+<br>
+
+
+  <% sum = 0 %>
+   <% @cart_items.each do |item| %>
+   <!--billing_amount-->
+    <% sum += (item.item.price * item.amount) %>
+     <% end %>
+<strong>商品合計</strong><%= sum %>
+<strong>請求金額</strong><%= sum + @order.shipping_cost %>
+<strong>送料</strong><%= @order.shipping_cost %>
+<br>
+<br>
+
+<strong>支払方法</strong>
+<%= form_with model:@order, url:orders_path, local:true do |f| %>
+<%= f.hidden_field :customer_id %>
+<%= f.hidden_field :address %>
+<%= f.hidden_field :postal_code %>
+<%= f.hidden_field :name %>
+<%= f.hidden_field :shipping_cost %>
+<%= f.hidden_field :billing_amount %>
+<%= f.hidden_field :payment_method %>
+<%= @order.payment_method %>
+<br>
+<strong>お届け先</strong>
+
+〒<%= @order.postal_code %>
+<%= @order.address %>
+<br>
+<%= @order.name %>
+<br>
+<%= f.submit '注文を確定する', class: "btn btn-success" %>
+<% end %>
