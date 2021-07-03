@@ -1,4 +1,4 @@
-<h6>注文情報確認</h6>
+<span style="color:#000000; background-color:#d3d3d3;">注文情報確認</span>
 <%# if @order.errors.any? %>
   <%#= @order.errors.count %>
   <!--件のエラーが発生しました-->
@@ -6,19 +6,19 @@
     <%#= message %>
   <%# end %>
 <%# end %>
-  <table>
+  <table border="1" align="center" style="border-collapse: collapse">
   <thead>
     <tr>
-      <th>商品名</th>
-      <th>単価(税込)</th>
-      <th>数量</th>
-      <th>小計</th>
+      <th class="table-warning">商品名</th>
+      <th class="table-warning">単価(税込)</th>
+      <th class="table-warning">数量</th>
+      <th class="table-warning">小計</th>
     </tr>
   </thead>
   <tbody>
-      <%= @cart_items.each do |item| %>
+      <% @cart_items.each do |item| %>
      <tr>
-       <td><%= item.item.name %></td>
+       <td><%= attachment_image_tag item.item, :image, format: 'jpeg', size: "50x50" %><%= item.item.name %></td>
        <td><%= item.item.price %></td>
        <td><%= item.amount %></td>
        <td><%= (item.item.price * item.amount) %></td>
@@ -34,9 +34,24 @@
    <!--billing_amount-->
     <% sum += (item.item.price * item.amount) %>
      <% end %>
-<strong>商品合計</strong><%= sum %>
-<strong>請求金額</strong><%= sum + @order.shipping_cost %>
-<strong>送料</strong><%= @order.shipping_cost %>
+
+<table border="1">
+  <tr>
+    <th class="table-warning">商品合計</th>
+    <td><%= sum %><td>
+  </tr>
+
+  <tr>
+    <th class="table-warning">請求金額</th>
+    <td><%= sum + @order.shipping_cost %><td>
+  </tr>
+
+    <tr>
+    <th class="table-warning">送料</th>
+    <td><%= @order.shipping_cost %><td>
+  </tr>
+</table>
+
 <br>
 <br>
 

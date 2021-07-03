@@ -1,8 +1,11 @@
 class AddressesController < ApplicationController
+   #before_action :authenticate_user!
+
   def index
      #@addresses = Address.all
+    @address = Address.new
+    #@addresses = Address.all
     @addresses = current_customer.addresses.all
-     @address = Address.new
  # @order_item = OrderItem.find(params[:id])
   end
 

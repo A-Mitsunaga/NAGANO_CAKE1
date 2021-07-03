@@ -32,14 +32,14 @@
 <table>
   <tr>
     <th>商品合計</th>
-    <td><%= sum %></td>
+    <td><%= @order.order_items.sum(:price) * @order.order_items.sum(:amount) %></td>
   </tr>
     <tr>
     <th>配送料</th>
     <td><%= @order.shipping_cost %></td>
   </tr>  <tr>
     <th>ご請求額</th>
-    <td><%= sum + @order.shipping_cost %></td>
+    <td><%= @order.order_items.sum(:price) * @order.order_items.sum(:amount) + @order.shipping_cost %></td>
   </tr>
 </table>
 
@@ -64,12 +64,12 @@
 
   <tbody>
     <!--注文商品-->
-    <%= @cart_items.each do |item| %>
+    <% @order.order_items.each do |item| %>
       <tr>
       <td><%= item.item.name %>
       <td><%= item.item.price %>
       <td><%= item.amount %></td>
-      <td><%= (item.item.price * item.amount) %></td>
+      <td><%= @order.order_items.sum(:price) * @order.order_items.sum(:amount) %></td>
       </tr>
       <% end %>
   </tbody>

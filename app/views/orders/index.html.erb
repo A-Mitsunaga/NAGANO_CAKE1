@@ -27,8 +27,7 @@
             <%= order_item.item.name %>
         <% end %>
       </td>
-      <td></td>
-      <td><%#= (item.item.price * item.amount) %>円</td>
+      <td><%= order.order_items.sum(:price) * order.order_items.sum(:amount) + order.shipping_cost%>円</td>
       <td><%= link_to "表示する", order_path(order.id), class: "btn btn-primary" %></td>
       </tr>
 
