@@ -1,11 +1,9 @@
 <span style="color:#000000; background-color:#d3d3d3;">注文情報確認</span>
-<%# if @order.errors.any? %>
-  <%#= @order.errors.count %>
-  <!--件のエラーが発生しました-->
-  <%# @order.errors.full_messages.each do |message| %>
-    <%#= message %>
-  <%# end %>
-<%# end %>
+<div class="container">
+  <div class="row">
+
+
+   <div class="col-lg-8">
   <table border="1" align="center" style="border-collapse: collapse">
   <thead>
     <tr>
@@ -26,12 +24,11 @@
      </tr>
   </tbody>
 </table>
-<br>
+</div>
 
-
+<div class="col-lg-4">
   <% sum = 0 %>
    <% @cart_items.each do |item| %>
-   <!--billing_amount-->
     <% sum += (item.item.price * item.amount) %>
      <% end %>
 
@@ -51,27 +48,43 @@
     <td><%= @order.shipping_cost %><td>
   </tr>
 </table>
+</div>
+</div>
+</div>
 
 <br>
 <br>
 
-<strong>支払方法</strong>
-<%= form_with model:@order, url:orders_path, local:true do |f| %>
-<%= f.hidden_field :customer_id %>
-<%= f.hidden_field :address %>
-<%= f.hidden_field :postal_code %>
-<%= f.hidden_field :name %>
-<%= f.hidden_field :shipping_cost %>
-<%= f.hidden_field :billing_amount %>
-<%= f.hidden_field :payment_method %>
-<%= @order.payment_method %>
-<br>
-<strong>お届け先</strong>
 
-〒<%= @order.postal_code %>
-<%= @order.address %>
+<table>
+  <tr>
+    <th>支払方法</th>
+    <td>
+      <%= form_with model:@order, url:orders_path, local:true do |f| %>
+      <%= f.hidden_field :customer_id %>
+      <%= f.hidden_field :address %>
+      <%= f.hidden_field :postal_code %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :shipping_cost %>
+      <%#= f.hidden_field :billing_amount %>
+      <%= f.hidden_field :payment_method %>
+      <%= @order.payment_method %>
+    </td>
+  </tr>
 <br>
-<%= @order.name %>
 <br>
+  <tr>
+    <th>お届け先</th>
+    <td>
+     〒<%= @order.postal_code %>
+        <%= @order.address %>
+      <br>
+      <%= @order.name %>
+      <br>
+    </td>
+  </tr>
+</table>
+<div class="text-center">
 <%= f.submit '注文を確定する', class: "btn btn-success" %>
 <% end %>
+</div>

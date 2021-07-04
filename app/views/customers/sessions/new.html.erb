@@ -10,13 +10,14 @@
 
       <p><%= f.label :email, "メールアドレス" %></p>
       <p><%= f.label :password, "パスワード" %></p>
-  </div>
+
 
       <div class="col-sm-9">
       <p><%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "sample@example.com", size: 40 %></p>
       <p><%= f.password_field :password, autocomplete: "current-password", size: 40 %></p>
       <div class="actions">
     <%= f.submit "ログイン", class: "btn btn-primary" %>
+      </div>
   </div>
 <% end %>
 </div>
@@ -24,3 +25,8 @@
     </div>
 </div>
 <br>
+
+
+
+<span style="color:#000000; background-color:#d3d3d3;">会員登録がお済みでない方</span>
+<%= link_to "こちら", new_customer_registration_path %>から新規登録を行なってください。

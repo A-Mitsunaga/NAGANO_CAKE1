@@ -13,9 +13,11 @@
     <br>
     <p><%= f.label :price, "税込価格" %></p>
     <p><%= f.label :is_active, "販売ステータス" %></p>
+    <% end %>
   </div>
 
       <div class="col-sm-9">
+      <%= form_with model:@item, url:'/admin/items/new', local:true do |f| %>
 
       <p><%= f.attachment_field :image %></p>
       <p><%= f.text_field :name, :placeholder => "商品名" %></p>

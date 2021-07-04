@@ -1,15 +1,18 @@
 <span style="color:#000000; background-color:#d3d3d3;">商品一覧</span>
-
+<br>
 <% @items.each do |item| %>
-<%= attachment_image_tag item, :image, format: 'jpeg', size: "100x100" %>
-<div class="container">
-<!--<span><%#= link_to item.name, "/items/#{item.id}" %></span>-->
-<!--<span>¥<%#= item.price %></span>-->
-  <div class="row">
-    <div class="col-lg-3">
-      <span><%= link_to item.name, "/items/#{item.id}" %></span>
-      <span>¥<%= item.price %></span>
-    </div>
-  </div>
-</div>
+<!--<div class="container">-->
+
+  <!--<div class="row">-->
+    <!--<div class="col-lg-3">-->
+      <%= attachment_image_tag item, :image, format: 'jpeg', size: "100x100" ,class:"flex"%>
+    <!--<div class="d-flex">-->
+    <body>
+      <p><%= link_to item.name, "/items/#{item.id}" %></p>
+      <p>¥<%= item.price %></p>
+    </body>
+    <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 <% end %>
