@@ -2,11 +2,13 @@
 
 <div class="container">
   <div class="row">
+
     <div class="col-sm-3">
       <%=form_with model: @customer,url: customer_registration_path, id: 'new_customer', class:'new_customer', local: true do |f| %>
       <p><%= f.label :full_name, "名前" %></p>
       <p><%= f.label :first_name, "フリガナ" %></p>
       <p><%= f.label :email, "メールアドレス" %></p>
+      <br>
       <p><%= f.label :postal_code, "郵便番号" %></p>
       <p><%= f.label :address, "住所" %></p>
       <p><%= f.label :telephone_number, "電話番号（ハイフンなし）" %></p>
@@ -15,10 +17,12 @@
         <em>(<%= @minimum_password_length %>文字以上)</em>
       </p>
       <p><%= f.label :password_confirmation, "パスワード（確認用）" %></p>
+      <% end %>
     </div>
 
     <div class="col-sm-9">
     <p>
+      <%=form_with model: @customer,url: customer_registration_path, id: 'new_customer', class:'new_customer', local: true do |f| %>
       <%= f.label :last_name, "（姓）" %>
       <%= f.text_field :last_name, autofocus: true, :placeholder => "令和" %>
       <%= f.label :first_name, "（名）" %>
@@ -32,8 +36,8 @@
     <%= f.text_field :first_name_kana, autofocus: true, :placeholder => "ミチコ" %>
     </p>
 
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
-    <p><%= f.text_field :postal_code, autofocus: true, :placeholder => "sample@example.com" %></p>
+    <p><%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "sample@example.com" %></p>
+    <p><%= f.text_field :postal_code, autofocus: true, :placeholder => "0000000" %></p>
     <p><%= f.text_field :address, autofocus: true, :placeholder => "東京都代々木神園町0-0", size: 40 %></p>
     <p><%= f.text_field :telephone_number, autofocus: true, :placeholder => "00000000000" %></p>
     <p>
@@ -48,6 +52,7 @@
     <%= f.submit "新規登録", class:"btn btn-success" %>
   </div>
     <% end %>
+
     </div>
   </div>
 </div>

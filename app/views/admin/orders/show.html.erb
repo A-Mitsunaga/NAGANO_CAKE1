@@ -33,6 +33,7 @@
       <table class="table">
   <thead>
     <tr class="table-warning">
+
       <th>商品名</th>
       <th>単価（税込）</th>
       <th>数量</th>
@@ -57,12 +58,16 @@
 
     </div>
     <div class="col-sm">
+ <% sum = 0 %>
+   <% @order.order_items.each do |order_item| %>
+    <% sum += (order_item.price * order_item.amount) %>
+     <% end %>
 
-
-<strong>商品合計</strong><%= @order.order_items.sum(:price) * @order.order_items.sum(:amount) %>円<br>
 <strong>送料</strong><%= @order.shipping_cost %>円<br>
-<strong>請求金額合計</strong><%= @order.order_items.sum(:price) * @order.order_items.sum(:amount) + @order.shipping_cost %>円
+<strong>商品合計</strong>
+<%= sum %>円<br>
+
+<strong>請求金額合計</strong><%= sum + @order.shipping_cost %>円
     </div>
   </div>
 </div>
-

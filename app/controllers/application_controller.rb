@@ -14,7 +14,14 @@ before_action :configure_permitted_parameters, if: :devise_controller?
     end
   end
 
-
+  #管理者とユーザーのログアウト後の遷移
+  def after_sign_out_path_for(resource)
+      if resource == :admin
+      new_admin_session_path
+      else
+      new_customer_session_path
+      end
+    end
 
 protected
 

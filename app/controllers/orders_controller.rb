@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   end
 
   def confirm
+    @billing_amount = calculate(current_customer)
     @cart_items = current_customer.cart_items.all
     @order = Order.new(order_params)
     if params[:address_status] == "ご自身の住所"
@@ -34,6 +35,7 @@ class OrdersController < ApplicationController
     if order.save!
       current_customer.cart_items.each do |cart_item|
       @order_item = OrderItem.new(order_id: order.id, item_id: cart_item.item.id, amount: cart_item.amount, price: cart_item.item.price )
+      @billing_amount = calculate(current_customer)
       @order_item.save
       end
       current_customer.cart_items.delete_all
@@ -46,17 +48,17 @@ class OrdersController < ApplicationController
   end
 
   def index
-    #@orders = current_customer.orders.all
-    @orders = Order.all
-    @cart_item = CartItem.all
-    #@cart_items = current_customer.cart_items.all
+    #@order = Order.find(params[:order][:order_id])
+    @orders = current_customer.orders.all
+    @order_items =  OrderItem.all
 
-  end
+    end
+
 
   def show
-    @orders = Order.all
     @order = Order.find(params[:id])
-    @cart_items = current_customer.cart_items.all
+    @orders = Order.all
+
    end
 
 
@@ -65,4 +67,12 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:customer_id, :postal_code, :address, :name, :shipping_cost, :billing_amount, :payment_method)
   end
 
-end
+
+   def calculate(customer)
+     billing_amount = 0
+     customer.cart_items.each do |cart_item|
+       billing_amount += cart_item.amount* cart_item.item.price + shipping_cost
+     end
+    return billing_amount
+   end
+ end
