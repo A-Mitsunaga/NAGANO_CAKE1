@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
 
-# strong parameter
-#before_action :authenticate_customer!,except: [:top, :about]
 before_action :configure_permitted_parameters, if: :devise_controller?
 
   # 管理者とユーザのログイン後の遷移
@@ -19,7 +17,7 @@ before_action :configure_permitted_parameters, if: :devise_controller?
       if resource == :admin
       new_admin_session_path
       else
-      new_customer_session_path
+      root_path
       end
     end
 

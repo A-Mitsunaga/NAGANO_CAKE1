@@ -1,7 +1,6 @@
 class Admin::CustomersController < ApplicationController
 
   def index
-    #@customers = Customer.all
     @customers = Customer.all.order(customer_id: :asc).page(params[:page]).per(3)
   end
 

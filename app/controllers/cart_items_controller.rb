@@ -1,9 +1,8 @@
 class CartItemsController < ApplicationController
-#before_action :setup_cart_item!, only: [:create, :index, :destroy, :destroy_all]
+
   def index
    @cart_items = current_customer.cart_items.all
    @billing_amount = calculate(current_customer)
-   #@items = current_customer.cart_items.all
 
   end
 
@@ -18,9 +17,8 @@ class CartItemsController < ApplicationController
         @cart_item.delete
       end
     end
-    @cart_item.save
-    redirect_to :cart_items
-
+       @cart_item.save
+      redirect_to :cart_items
   end
 
   def update

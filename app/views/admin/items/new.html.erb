@@ -1,12 +1,18 @@
 <br>
-    <span style="color:#000000; background-color:#d3d3d3;">商品新規登録</span>
+<span style="color:#000000; background-color:#d3d3d3;">商品新規登録</span>
+
+<% if @item.errors.any? %>
+  <%= @item.errors.count %>件のエラーが発生しました
+  <% @item.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
 
 
 <div class="container">
   <div class="row">
     <div class="col-sm-3">
     <%= form_with model:@item, url:'/admin/items/new', local:true do |f| %>
-
 
     <p><%= f.label :image, "商品画像" %></p>
     <p><%= f.label :name, "商品名" %></p>
@@ -30,7 +36,6 @@
       <%= f.radio_button :sales_status, :discontinued %>
       <%= f.label :sales_status_discontinued, '販売中止' %>
       </p>
-
 
       <div class="actions">
       <%= f.submit "新規登録" , class: "btn btn-primary" %>
